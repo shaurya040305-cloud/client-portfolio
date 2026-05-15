@@ -5,42 +5,51 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfolio | Professional Showcase</title>
     <style>
-        /* This makes the PDF fill the entire browser window */
-        body, html {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            width: 100%;
-            overflow: hidden;
-            background-color: #333; /* A dark background for a clean look */
-        }
+        body, html { margin: 0; padding: 0; height: 100%; width: 100%; background-color: #1a1a1a; font-family: sans-serif; overflow: hidden; }
         
-        iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
+        /* The PDF container */
+        .pdf-container { width: 100%; height: 100%; border: none; }
 
-        /* Mobile fallback message */
-        .mobile-note {
-            display: none;
+        /* The Mobile Fallback UI */
+        .mobile-fallback {
+            display: none; /* Hidden by default on desktop */
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
             text-align: center;
-            padding: 20px;
             color: white;
-            font-family: sans-serif;
+            padding: 20px;
         }
 
-        @media (max-width: 600px) {
-            .mobile-note { display: block; }
+        .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        /* Show the fallback on small screens */
+        @media only screen and (max-width: 1024px) {
+            .pdf-container { display: none; }
+            .mobile-fallback { display: flex; }
+            body { overflow: auto; }
         }
     </style>
 </head>
 <body>
-    <!-- The #view=FitH makes the PDF fit the width automatically -->
-    <iframe src="portfolio.pdf#toolbar=0&navpanes=0&scrollbar=1&view=FitH">
-        <p>Your browser does not support iframes. 
-           <a href="portfolio.pdf">Click here to view the portfolio.</a>
-        </p>
-    </iframe>
+
+    <iframe class="pdf-container" src="portfolio.pdf#toolbar=0&navpanes=0&scrollbar=1&view=FitH"></iframe>
+
+    <div class="mobile-fallback">
+        <h2>Portfolio Showcase</h2>
+        <p>Your device doesn't support viewing PDFs directly in the browser.</p>
+        <a href="portfolio.pdf" class="btn">Click to View Portfolio</a>
+    </div>
+
 </body>
 </html>
